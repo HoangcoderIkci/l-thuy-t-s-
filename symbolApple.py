@@ -113,7 +113,9 @@ def giai_phuong_trinh_binh_phuong(a, P):
             while t % 2 == 0:
                 t /= 2
                 s += 1
+            print(f"s : {s},t : {t}")
             a_t = tinh_gia_tri_a_mu_x_in_mod_p(a, int(t), P)
+            print(f"a_t : {a_t}")
             if a_t == 1:
                 n_1 = tinh_gia_tri_a_mu_x_in_mod_p(a, int((t + 1) / 2), P)
                 return n_1, (P - n_1) % P
@@ -121,8 +123,10 @@ def giai_phuong_trinh_binh_phuong(a, P):
             b = random.randint(1, P)
             while kiem_tra_binh_phuong(b, P) == 1:
                 b = random.randint(1, P)
+            print(f" b : {b}")
             g = tinh_gia_tri_a_mu_x_in_mod_p(b, int(t), P)
             c = tinh_gia_tri_a_mu_x_in_mod_p(b, 2, P)
+            print(f" g : {g}, c : {c}")
             j = 0
             mu = 1 << s - 2
             for k in range(s - 1):
@@ -133,17 +137,21 @@ def giai_phuong_trinh_binh_phuong(a, P):
                 mu >>= 1
                 if r_temp != 1:
                     j += 1 << k
-                # print(j)
+                print(f"j hiện tại : {j}")
             r_1 = Nhan_trong_module(
                 tinh_gia_tri_a_mu_x_in_mod_p(g, j, P),
                 tinh_gia_tri_a_mu_x_in_mod_p(a, int((t + 1) / 2), P),
                 P,
             )
+            print("Your Nghiệm : ")
             return r_1, (P - r_1) % P
 
 
-lst = [[6, 7], [10, 13], [2, 311], [3, 37]]
-for elem in lst:
-    print(giai_phuong_trinh_binh_phuong(elem[0], elem[1]))
-# a = giai_phuong_trinh_binh_phuong(10, 13)
-# print(a)
+print("Giải phương trình dạng : x^2 = a (P) ")
+while True:
+    a = int(input("Nhập giá trị a :"))
+    p = int(input("Nhập giá trị p :"))
+    print(giai_phuong_trinh_binh_phuong(a, p))
+    check = input("You want to continue ?(Y/N)")
+    if check == "N":
+        break
