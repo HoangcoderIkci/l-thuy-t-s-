@@ -125,15 +125,16 @@ def giai_phuong_trinh_binh_phuong(a, P):
                 b = random.randint(1, P)
             print(f" b : {b}")
             g = tinh_gia_tri_a_mu_x_in_mod_p(b, int(t), P)
-            c = tinh_gia_tri_a_mu_x_in_mod_p(b, 2, P)
+            c = tinh_gia_tri_a_mu_x_in_mod_p(g, 2, P)
             print(f" g : {g}, c : {c}")
             j = 0
             mu = 1 << s - 2
+            temp_c = c
             for k in range(s - 1):
-                c = tinh_gia_tri_a_mu_x_in_mod_p(c, j, P)
+                c = tinh_gia_tri_a_mu_x_in_mod_p(temp_c, j, P)
                 temp1 = tinh_gia_tri_a_mu_x_in_mod_p(c, mu, P)
                 temp2 = tinh_gia_tri_a_mu_x_in_mod_p(a_t, mu, P)
-                r_temp = tinh_gia_tri_a_mu_x_in_mod_p(temp2, temp1, P)
+                r_temp = Nhan_trong_module(temp2, temp1, P)
                 mu >>= 1
                 if r_temp != 1:
                     j += 1 << k
